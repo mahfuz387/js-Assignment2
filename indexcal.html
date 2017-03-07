@@ -1,0 +1,278 @@
+<html lang="en">
+<head>
+
+  <title>js Assignment_2 calculator</title>
+
+  <style>
+    body {
+background: #F4F4F4;
+padding-top: 70px;
+margin: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font: bold 14px Arial, sans-serif;
+}
+
+
+#calculator {
+  background:#9dd2ea;
+   width: 325px;
+   height: auto;
+  margin: 100px auto;
+  padding: 20px 20px 9px;
+  border-radius: 4px;
+  box-shadow: 0px 4px #908b85, 0px 10px 15px rgba(0, 0, 0, 0.2);
+
+  
+}
+
+.cal-header{
+  margin-bottom: 20px;
+}
+.cal-header h3{
+  text-align: center;
+  letter-spacing: 1.5;
+  font-size: 20px;
+  color:#3c4761;
+
+
+}
+
+.top button.clear {
+  float: left;
+}
+
+
+.top .screen {
+  height: 40px;
+  width: 212px;
+  float: right;
+  padding: 0 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  font-size: 17px;
+  line-height: 40px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-align: right;
+   box-shadow: inset 0px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+}
+
+
+.keys, .top {overflow: hidden;}
+
+.keys button, .top button.clear {
+   float: left;
+  position: relative;
+  top: 0;
+  cursor: pointer;
+  width: 66px;
+  height: 36px;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0px 3px rgba(0, 0, 0, 0.2);
+  margin: 0 7px 11px 0;
+  color: red;
+  text-align: center;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+
+.keys button.operator {
+  background: #FFF0F5;
+  margin-right: 0;
+}
+
+.keys button.eval {
+   background: #256B8E;
+  box-shadow: 0px 3px #B3ADA7;
+  color: #888e5f;
+}
+
+.top button.clear {
+  background: red;
+  box-shadow: 0px 3px #B3ADA7;
+  color: white;
+}
+
+
+.keys button:hover {
+  background:  #ff7c87;
+  box-shadow: 0px 3px #ff7c87;
+  color: white;
+}
+
+.keys button.eval:hover {
+  background: #ff7c87;;
+  box-shadow: 0px 3px #ff7c87;
+  color: #ffffff;
+}
+
+.top button.clear:hover {
+  background: #f68991;
+  box-shadow: 0px 3px #d3545d;
+  color: white;
+}
+
+
+.keys button:active {
+   box-shadow: 0px 0px #6b54d3;
+  top: 4px;
+}
+
+.keys button.eval:active {
+    box-shadow: 0px 0px #717a33;
+    top: 4px;
+}
+
+.top button.clear:active {
+  top: 3px;
+  box-shadow: 0px 0px #d3545d;
+}
+
+
+  </style>
+	<meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+	
+</head>
+<body>
+<div class='container'>
+  <div id='calculator'>
+
+    <div class='cal-header'>
+      <h3> CALCULATOR</h3>
+    </div>
+
+
+   <div class="top">
+    <button class='clear' value='ac'>C</button>
+    <div class="screen"></div>
+   </div>
+
+
+    <div class="Keys">
+
+      <button value='7'>7</button>
+      <button value='8'>8</button>
+      <button value='9'>9</button>
+      <button class="operator" value='+'>+</button>
+
+      <button value='4'>4</button>
+      <button value='5'>5</button>
+      <button value='6'>6</button>
+      <button class="operator"value='-'>-</button>
+
+
+      <button value='1'>1</button>
+      <button value='2'>2</button>
+      <button value='3'>3</button>
+      <button class="operator">÷</button>
+
+      <button value="0">0</button>
+      <button value='.'>.</button>
+      <button class='eval' value='='>=</button>
+       <button class="operator"   value='x'>x</button>
+
+    </div>
+ 
+  
+  </div>
+
+</div>
+<script>
+var keys = document.querySelectorAll('#calculator button');
+var operators = ['+', '-', 'x', '÷'];
+var decimalAdded = false;
+
+for(var i = 0; i < keys.length; i++) {
+  keys[i].onclick = function(e) {
+   
+    var input = document.querySelector('.screen');
+    var inputVal = input.innerHTML;
+    var btnVal = this.innerHTML;
+    
+ 
+    if(btnVal == 'C') {
+      input.innerHTML = '';
+      decimalAdded = false;
+    }
+
+    else if(btnVal == '=') {
+      var equation = inputVal;
+      var lastChar = equation[equation.length - 1];
+      
+     
+      equation = equation.replace(/x/g, '*').replace(/÷/g, '/');
+      
+    
+      if(operators.indexOf(lastChar) > -1 || lastChar == '.')
+        equation = equation.replace(/.$/, '');
+      
+      if(equation)
+        input.innerHTML = eval(equation);
+        
+      decimalAdded = false;
+    }
+
+
+   else if(operators.indexOf(btnVal) > -1) {
+    
+      var lastChar = inputVal[inputVal.length - 1];
+      
+
+      if(inputVal != '' && operators.indexOf(lastChar) == -1) 
+        input.innerHTML += btnVal;
+      
+    
+      else if(inputVal == '' && btnVal == '-') 
+        input.innerHTML += btnVal;
+      
+     
+      if(operators.indexOf(lastChar) > -1 && inputVal.length > 1) {
+    
+        input.innerHTML = inputVal.replace(/.$/, btnVal);
+      }
+      
+      decimalAdded =false;
+    }
+
+
+    else if(btnVal == '.') {
+      if(!decimalAdded) {
+        input.innerHTML += btnVal;
+        decimalAdded = true;
+      }
+    }
+    
+   
+    else {
+      input.innerHTML += btnVal;
+    }
+    
+ 
+    e.preventDefault();
+  } 
+}
+
+</script>
+
+
+
+
+
+ <script src="js/jquery-2.2.4.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+ 
+</body>
+</html>

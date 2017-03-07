@@ -1,0 +1,63 @@
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>js Assignment_2 Multiplication table</title>
+
+     
+    
+
+<style>
+body {
+background: #F4F4F4;
+padding-top: 70px;
+margin: 0;
+}
+</style>
+</head>
+<body>
+<table border="0" style="margin: 0 auto; width:500px">
+    <tr>
+        <td colspan="2"><h3>Print Multiplication Table</h3></td>
+    </tr>
+ 
+    <tr>
+        <td width="25%">Enter a Number : </td>
+        
+        <td><input type="number" onchange="printTable(this)"></td>
+      
+        
+    </tr>
+    <tr>
+        <td colspan="2"><span id="multi"></span></td>
+    </tr>
+</table>
+
+ 
+<script>
+function printTable(num) {
+    var input = num.value;
+    if(!isNaN(input)) {
+        var table="";
+        var number="";
+        for(i=1;i<=10;i++) {
+            number = input * i;
+            table +=  input + " * " + i + " = " + number + "<br/>";
+        }
+        document.getElementById("multi").innerHTML = table;
+    }
+    else {
+        document.getElementById("multi").innerHTML = "Please Enter a valid Number";
+    }
+}
+</script>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+</html> 

@@ -1,0 +1,67 @@
+<html>
+<head>
+	
+	<title>js Assignment_2 Palindrome</title>
+	<style>
+	body {
+     background: #F4F4F4;
+     padding-top: 70px;
+    
+  
+    }
+		input{
+			padding: 10px;
+					
+		}
+		form{
+			
+			text-align: center;			
+		}
+	</style>
+	
+</head>
+<body>
+
+	<form >
+		
+		<h4>Find the Palindrome</a></h4>
+		<input type="text" id="txtbox" placeholder="Enter String" />
+		<input type="button" onclick="Palindrome()" value="Check Palindrome" />
+	</form>
+
+
+	<script>
+		
+		function Palindrome()
+		{
+			
+			var str = document.getElementById('txtbox').value;
+			
+			
+			var result = checkPalindrome(str);
+			alert('The Entered String "'+str +'" is "'+result+'"');
+		}
+		
+		function checkPalindrome(str)
+		{
+			var orignalStr;
+
+			str = str.toLowerCase();
+
+			orignalStr = str;
+
+			str = str.split(''); 
+			str = str.reverse(); 
+			str = str.join(''); 
+			
+			var reverseStr = str;
+			
+			if(orignalStr == reverseStr){
+				return 'Palindrome'; 
+			}else{
+				return 'Not Palindrome';
+			}
+		}
+	</script>
+</body>
+</html>
